@@ -1,0 +1,40 @@
+#include "funciones.h"
+#include "algoritmo.h"
+
+int main(){
+	int tam;
+	int* precios;
+	int* memoria;
+	int* solucion;
+	int nPrecios;
+	
+	tam = obtenerTamanioVarilla();
+	initArreglo(&memoria, tam+1, -1);
+	initArreglo(&solucion, tam+1, 0);
+		
+	if(preguntarValoresPorUsuario()){
+		nPrecios = tam+1;
+		initArreglo(&precios, tam+1, 0);
+		ingresarPrecios(precios, tam);
+	}
+	else{
+		nPrecios = 5;
+		initArreglo(&precios, 5, 0);
+		precios[1] = 1;
+		precios[2] = 5;
+		precios[3] = 8;
+		precios[4] = 9;
+	}
+	
+	printf("\nLa mejor ganancia es: %d", cortar(precios, memoria, solucion, tam, nPrecios));
+	imprimirSolucion(solucion, tam);
+	
+	if(preguntarFuerzaBruta()){
+		printf("\nLa mejor ganancia es:%d", cortarFuerzaBruta(precios, tam, nPrecios));
+	}
+	
+	free(precios);
+	free(memoria);
+	free(solucion);
+	return (0);
+}
